@@ -5,23 +5,30 @@ import {
   Button,
   TouchableHighlight,
   TouchableWithoutFeedback,
+  ActivityIndicator,
 } from "react-native";
 import React from "react";
 import colors from "../Config/colors";
 
 interface CustomButtonProps {
   backgroudColor?: string;
+  loading?: boolean;
   onPressed: () => void;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
   backgroudColor,
+  loading = false,
   onPressed,
 }) => {
   return (
     <TouchableWithoutFeedback onPress={onPressed}>
       <View style={styles.button}>
-        <Text style={styles.text}>Login</Text>
+        {loading ? (
+          <ActivityIndicator size="large" color="#fff" />
+        ) : (
+          <Text style={styles.text}>Login</Text>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -32,6 +39,7 @@ export default CustomButton;
 const styles = StyleSheet.create({
   button: {
     width: "100%",
+    height: 45,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: colors.primary,

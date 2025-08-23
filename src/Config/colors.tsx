@@ -4,4 +4,5 @@ export default {
   onSurface: "#F1F4F9",
   dark: "#282828ff",
   white: "#ffffff",
+  shadow: "#676767ff",
 };

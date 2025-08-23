@@ -18,3 +18,8 @@ npm install @reduxjs/toolkit react-redux axios @react-native-async-storage/async
 
 npm i expo-constants
 npm install @expo/vector-icons
+npm install react-native-dotenv 
+npm install react-native-toast-message
+npm install react-native-notificated
+npm install @react-navigation/bottom-tabs
+npm install react-native-paper

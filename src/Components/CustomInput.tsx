@@ -9,6 +9,7 @@ interface CustomInputProps {
   keyboardType?: string;
   textContentType?: string;
   secureTextEntry?: boolean;
+  editable?: boolean;
   onChangeText: (text: string) => void;
 }
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -17,6 +18,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
   keyboardType,
   textContentType,
   secureTextEntry = false,
+  editable = true,
   onChangeText,
 }) => {
   return (
@@ -33,6 +35,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
         textContentType={textContentType as any}
         secureTextEntry={secureTextEntry}
         onChangeText={onChangeText}
+        editable={editable}
       />
     </View>
   );

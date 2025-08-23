@@ -3,11 +3,13 @@ import { User } from "./Models/User";
 
 interface AuthState {
   token: string | null;
+  refreshToken: string | null;
   user: User | null;
 }
 
 const initialAuthState: AuthState = {
   token: null,
+  refreshToken: null,
   user: null,
 };
 
