@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCurrentUser } from "../Services/authStorage";
-import { setCredentials } from "../Store/Slices/AuthSlice";
+import { setCredentials } from "../Store/Slices/Auth/AuthSlice";
 
 const AppLoader = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
@@ -16,7 +16,9 @@ const AppLoader = ({ children }: { children: React.ReactNode }) => {
           const token = user.token;
           const refreshToken = user.refreshToken;
           const userData = user.user;
-          dispatch(setCredentials({ token, refreshToken, user: userData }));
+          dispatch(
+            setCredentials({ token, refreshToken, user: userData, error: null })
+          );
         }
       } catch (error) {
         console.log(error);

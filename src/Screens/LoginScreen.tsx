@@ -7,53 +7,30 @@ import CustomInput from "../Components/CustomInput";
 import CustomButton from "../Components/CustomButton";
 import colors from "../Config/colors";
 import axiosInstance from "../Services/api";
-import { User } from "../Store/Slices/Models/User";
+import { User } from "../Store/Slices/Auth/Models/User";
 import { saveUser } from "../Services/authStorage";
-import { useDispatch } from "react-redux";
-import { setCredentials } from "../Store/Slices/AuthSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../Store/index";
+import { loginUser, setCredentials } from "../Store/Slices/Auth/AuthSlice";
 
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const dispatch = useDispatch();
+  const { error } = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleLogin = async () => {
     if (disabled) {
       try {
         setDisabled(false);
-        const response = await axiosInstance.post("auth/login", {
-          username,
-          password,
-        });
-        const data = response.data;
-        const user: User = {
-          id: data.id,
-          username: data.username,
-          email: data.email,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          gender: data.gender,
-          image: data.image,
-        };
-        const token = data.accessToken;
-        const refreshToken = data.refreshToken;
-        await saveUser({
-          token: token,
-          refreshToken: refreshToken,
-          user,
-        });
-        dispatch(setCredentials({ token, refreshToken, user }));
+        await dispatch(loginUser({ username, password }));
+        setDisabled(true);
+      } catch (error) {
         Toast.show({
-          type: "success",
-          text1: "Login Successful ",
-          text2: "Welcome back!",
+          type: "error",
+          text1: "Error",
         });
-        setDisabled(true);
-      } catch (err) {
-        Alert.alert("Login failed", "Check your credentials");
-        console.error(err);
-        setDisabled(true);
       }
     }
   };
@@ -81,6 +58,7 @@ const LoginScreen = () => {
               editable={disabled}
               onChangeText={(password) => setPassword(password)}
             />
+            {error && <Text style={styles.errorMessage}>{error.message}!</Text>}
             <View style={styles.forgotPasswordContainer}>
               <Text style={styles.forgotPasswordLabel}>
                 Forgot your password ?
@@ -115,6 +93,10 @@ const styles = StyleSheet.create({
   },
   inputsContainer: {
     marginBottom: 20,
+  },
+  errorMessage: {
+    color: colors.red,
+    marginHorizontal: 5,
   },
   forgotPasswordContainer: {
     flexDirection: "row",

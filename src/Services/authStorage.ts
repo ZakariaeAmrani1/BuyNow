@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { User } from "../Store/Slices/Models/User";
+import { User } from "../Store/Slices/Auth/Models/User";
 
 const AUTH_KEY = "auth";
 

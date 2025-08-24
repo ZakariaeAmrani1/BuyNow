@@ -6,8 +6,25 @@ import { FAB } from "react-native-paper";
 
 import HomeScreen from "../Screens/HomeScreen";
 import colors from "../Config/colors";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ProductScreen from "../Screens/ProductScreen";
+
+export type HomeStackParams = {
+  Main: undefined;
+  ProductDetails: undefined;
+};
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator<HomeStackParams>();
+
+function HomeStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Main" component={HomeScreen} />
+      <Stack.Screen name="ProductDetails" component={ProductScreen} />
+    </Stack.Navigator>
+  );
+}
 
 export default function AppTabs() {
   return (
@@ -29,7 +46,7 @@ export default function AppTabs() {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
