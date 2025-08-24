@@ -17,20 +17,21 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logos/logo.png",
+        "foregroundImage": "./assets/logos/logo1.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.zakariaeamrani.BuyNow"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/logos/logo.png"
     },
     "extra": {
       "eas": {
         "projectId": "556600b2-8fef-45c2-8c06-a6785ed5e0a0"
       }
     },
-    "owner": "zakariaeamrani"
+    "owner": "zakariaeamrani",
+    "plugins": ["expo-font"]
   }
 }

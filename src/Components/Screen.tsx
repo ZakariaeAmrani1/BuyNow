@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import React, { ReactNode } from "react";
 
 import Constants from "expo-constants";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface ScreenProps {
   children: ReactNode;

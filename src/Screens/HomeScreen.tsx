@@ -88,7 +88,7 @@ const HomeScreen = () => {
           <View style={styles.title}>
             <Text style={styles.text}>Welcome back</Text>
             <Text style={styles.customText}>
-              {user?.lastName} {user?.firstName}
+              {user?.lastName ?? ""} {user?.firstName ?? ""}
             </Text>
           </View>
           <View>
