@@ -1,20 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from "react-redux";
+
+import { store } from "./src/Store";
+import RootNavigator from "./src/Navigations/RootNavigator";
+import AppLoader from "./src/Navigations/AppLoader";
+import CustomModal from "./src/Components/CustomModal";
+import Toast from "react-native-toast-message";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <AppLoader>
+        <RootNavigator />
+        <CustomModal />
+        <Toast />
+      </AppLoader>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
