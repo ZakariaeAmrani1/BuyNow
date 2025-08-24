@@ -1,11 +1,12 @@
 import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_URL } from "@env";
 import { getCurrentUser, saveUser } from "./authStorage";
 import { logout } from "../Store/Slices/Auth/AuthSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../Store";
 
 const instance = axios.create({
-  baseURL: API_URL, // replace with your API
+  baseURL: API_URL,
 });
 
 instance.interceptors.request.use(async (config) => {
@@ -29,6 +30,7 @@ instance.interceptors.response.use(
 instance.interceptors.response.use(
   (response) => response,
   async (error) => {
+    const dispatch = useDispatch<AppDispatch>();
     const originalRequest = error.config;
 
     if (error.response?.status === 401 && !originalRequest._retry) {
@@ -58,6 +60,3 @@ instance.interceptors.response.use(
 );
 
 export default instance;
-function dispatch(arg0: any) {
-  throw new Error("Function not implemented.");
-}

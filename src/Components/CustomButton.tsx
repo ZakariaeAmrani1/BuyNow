@@ -2,8 +2,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
-  TouchableHighlight,
   TouchableWithoutFeedback,
   ActivityIndicator,
 } from "react-native";

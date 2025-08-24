@@ -1,8 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Product } from "../Product/Models/Product";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../..";
-import { updateProduct } from "../Product/ProductsSlice";
 
 interface ModalState {
   visible: boolean;

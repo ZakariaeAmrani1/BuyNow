@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCurrentUser } from "../Services/authStorage";

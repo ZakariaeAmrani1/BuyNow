@@ -3,8 +3,6 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  View,
-  Button,
   Pressable,
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -20,9 +18,6 @@ import { closeModal, updateModalData } from "../Store/Slices/Modal/ModalSlice";
 import CustomButton from "./CustomButton";
 import colors from "../Config/colors";
 import { updateProduct } from "../Store/Slices/Product/ProductsSlice";
-import Toast from "react-native-toast-message";
-
-const { height } = Dimensions.get("window");
 
 const CustomModal = () => {
   const dispatch = useDispatch<AppDispatch>();

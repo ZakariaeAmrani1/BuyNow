@@ -17,7 +17,6 @@ import { loadProduct } from "../Store/Slices/Product/ProductsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../Store";
 import { openModal } from "../Store/Slices/Modal/ModalSlice";
-import Toast from "react-native-toast-message";
 
 type ProductDetailsNavigationProp = NativeStackNavigationProp<
   HomeStackParams,
