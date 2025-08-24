@@ -1,7 +1,8 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_URL } from "@env";
-import { getCurrentUser } from "./authStorage";
+import { getCurrentUser, saveUser } from "./authStorage";
+import { logout } from "../Store/Slices/Auth/AuthSlice";
 
 const instance = axios.create({
   baseURL: API_URL, // replace with your API
@@ -25,4 +26,38 @@ instance.interceptors.response.use(
   }
 );
 
+instance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      const user = await getCurrentUser();
+      const refreshToken = user?.refreshToken;
+      if (refreshToken) {
+        try {
+          const response = await axios.post(`${API_URL}auth/refresh`, {
+            refreshToken,
+          });
+          const newToken = response.data.accessToken;
+          user.token = newToken;
+          await saveUser(user);
+          originalRequest.headers.Authorization = `Bearer ${newToken}`;
+          return instance(originalRequest);
+        } catch (err) {
+          console.log("Refresh failed", err);
+          dispatch(logout());
+        }
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 export default instance;
+function dispatch(arg0: any) {
+  throw new Error("Function not implemented.");
+}

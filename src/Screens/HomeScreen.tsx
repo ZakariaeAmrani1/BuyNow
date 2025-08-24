@@ -5,12 +5,12 @@ import {
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
+  TouchableOpacity,
   View,
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
-import Screen from "../Components/Screen";
-import { User } from "../Store/Slices/Auth/Models/User";
-import { AppDispatch, RootState } from "../Store";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
 
 import { useSelector } from "react-redux";
 import colors from "../Config/colors";
@@ -20,6 +20,9 @@ import { useDispatch } from "react-redux";
 import { logout } from "../Store/Slices/Auth/AuthSlice";
 import Toast from "react-native-toast-message";
 import { loadProducts } from "../Store/Slices/Product/ProductsSlice";
+import { HomeStackParams } from "../Navigations/AppTabs";
+import { AppDispatch, RootState } from "../Store";
+import Screen from "../Components/Screen";
 
 const HomeScreen = () => {
   const user = useSelector((state: RootState) => state.auth.user);
@@ -30,6 +33,13 @@ const HomeScreen = () => {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+
+  type HomeScreenNavigationProp = NativeStackNavigationProp<
+    HomeStackParams,
+    "Main"
+  >;
+
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
   useEffect(() => {
     handleLoadingProducts(20, page);
@@ -56,6 +66,10 @@ const HomeScreen = () => {
     }
   };
 
+  const handleProductDetails = (id: number) => {
+    navigation.navigate("ProductDetails", { id });
+  };
+
   const handleUserLogout = async () => {
     try {
       dispatch(logout());
@@ -66,6 +80,7 @@ const HomeScreen = () => {
       });
     }
   };
+
   return (
     <Screen>
       <View style={styles.container}>
@@ -91,11 +106,16 @@ const HomeScreen = () => {
             data={products}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <CustomList
-                name={item.title}
-                price={item.price}
-                rating={item.rating}
-              />
+              <TouchableOpacity
+                onPress={() => handleProductDetails(item.id)}
+                activeOpacity={0.9}
+              >
+                <CustomList
+                  name={item.title}
+                  price={item.price}
+                  rating={item.rating}
+                />
+              </TouchableOpacity>
             )}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

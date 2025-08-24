@@ -11,7 +11,7 @@ import ProductScreen from "../Screens/ProductScreen";
 
 export type HomeStackParams = {
   Main: undefined;
-  ProductDetails: undefined;
+  ProductDetails: { id: number };
 };
 
 const Tab = createBottomTabNavigator();
@@ -50,6 +50,33 @@ export default function AppTabs() {
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Products"
+        component={HomeStack}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="shopping" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Favorites"
+        component={HomeStack}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="heart" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={HomeStack}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="cog" color={color} size={size} />
           ),
         }}
       />

@@ -11,23 +11,25 @@ import React from "react";
 import colors from "../Config/colors";
 
 interface CustomButtonProps {
-  backgroudColor?: string;
+  value: string;
+  backgroundColor?: string;
   loading?: boolean;
   onPressed: () => void;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
-  backgroudColor,
+  value,
+  backgroundColor,
   loading = false,
   onPressed,
 }) => {
   return (
     <TouchableWithoutFeedback onPress={onPressed}>
-      <View style={styles.button}>
+      <View style={[styles.button, backgroundColor && { backgroundColor }]}>
         {loading ? (
           <ActivityIndicator size="large" color="#fff" />
         ) : (
-          <Text style={styles.text}>Login</Text>
+          <Text style={styles.text}>{value}</Text>
         )}
       </View>
     </TouchableWithoutFeedback>

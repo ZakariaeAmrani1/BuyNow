@@ -6,12 +6,9 @@ import Screen from "../Components/Screen";
 import CustomInput from "../Components/CustomInput";
 import CustomButton from "../Components/CustomButton";
 import colors from "../Config/colors";
-import axiosInstance from "../Services/api";
-import { User } from "../Store/Slices/Auth/Models/User";
-import { saveUser } from "../Services/authStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../Store/index";
-import { loginUser, setCredentials } from "../Store/Slices/Auth/AuthSlice";
+import { loginUser } from "../Store/Slices/Auth/AuthSlice";
 
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
@@ -29,7 +26,7 @@ const LoginScreen = () => {
       } catch (error) {
         Toast.show({
           type: "error",
-          text1: "Error",
+          text1: "Error while login",
         });
       }
     }
@@ -66,10 +63,13 @@ const LoginScreen = () => {
               <Text style={styles.forgotPasswordText}>Reset Password</Text>
             </View>
           </View>
-          <CustomButton onPressed={handleLogin} loading={!disabled} />
+          <CustomButton
+            value="Login"
+            onPressed={handleLogin}
+            loading={!disabled}
+          />
         </View>
       </View>
-      <Toast />
     </Screen>
   );
 };

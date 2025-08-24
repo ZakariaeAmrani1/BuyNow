@@ -7,4 +7,5 @@ export interface Product {
   rating: number;
   tags: string[];
   brand: string;
+  images?: string[];
 }

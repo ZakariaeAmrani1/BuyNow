@@ -1,8 +1,4 @@
-npx create-expo-app BuyNow --template
-yarn add @react-navigation/native @react-navigation/native-stack @react-navigation/bottom-tabs
-yarn add @reduxjs/toolkit react-redux axios
-yarn add @react-native-async-storage/async-storage
-yarn add react-native-reanimated react-native-gesture-handler
+
 
 
 npm install --save-dev typescript @types/react @types/react-native
@@ -23,3 +19,6 @@ npm install react-native-toast-message
 npm install react-native-notificated
 npm install @react-navigation/bottom-tabs
 npm install react-native-paper
+npm install react-native-reanimated
+npm install -g eas-cli
+ npm install expo-dev-client        
